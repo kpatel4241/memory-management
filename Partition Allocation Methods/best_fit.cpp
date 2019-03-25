@@ -6,30 +6,38 @@
 
 using namespace std;
 
-void first_fit(int block_size[] , int m , int request_size[] , int n)
+void best_fit(int block_size[] , int m , int requested_size[] , int n)
 {
-    int allocation[n];
+    int allocation[n],best_block,i,j;
 
-    memset(allocation,-1, sizeof(allocation));
+    memset(allocation,-1,sizeof(allocation));
 
-    for(int i=0;i<n;i++)
+    for(i=0;i<n;i++)
     {
-        for(int j=0;j<m;j++)
+        best_block = -1;
+        for(j=0;j<m;j++)
         {
-            if( block_size[j] >= request_size[i])
+            if(block_size[j] >= requested_size[i])
             {
-                allocation[i] = j;
-                block_size[j] -= request_size[i];
-                break;
+                if(best_block == -1)
+                    best_block = j;
+                else if(block_size[best_block] > block_size[j])
+                    best_block = j;
             }
+        }
+
+        if(best_block != -1)
+        {
+            allocation[i] = best_block;
+            block_size[best_block] -= requested_size[i];
         }
     }
 
-    cout<<"\n Process No. \tRequested Size \tBlock No. \n";
-    for(int i=0;i<n;i++)
+    cout<<"\n Process No. \tRequested Size \tBlock No.\n";
+    for(i=0;i<n;i++)
     {
-        cout<<" "<<i+1<<"\t\t"<<request_size[i]<<"\t\t";
-        if( allocation[i] != -1)
+        cout<<" "<<i+1<<"\t\t"<<requested_size[i]<<"\t\t";
+        if(allocation[i] != -1)
             cout<<allocation[i]+1;
         else
             cout<<"Not Allocated";
@@ -37,8 +45,8 @@ void first_fit(int block_size[] , int m , int request_size[] , int n)
     }
 }
 
-/*
-int main()
+
+/* int main()
 {
     int i,n,m;
     cout<<"\n Enter the no. of block_sizes : ";
@@ -62,15 +70,13 @@ int main()
     for(i=0;i<n;i++)
         cin>>request_size[i];
 
-    first_fit(block_size,m,request_size,n);
+    best_fit(block_size,m,request_size,n);
 
     return 0;
 }
 */
 
-
-
- int main()
+int main()
 {
     int block_size[] = {100, 500, 200, 300, 600};
     int requested_size[] = {212, 417, 112, 426};
@@ -82,7 +88,7 @@ int main()
         cout<<block_size[i]<<" ";
     cout<<endl;
 
-    first_fit(block_size , m , requested_size , n);
+    best_fit(block_size , m , requested_size , n);
 
     return 0;
 }
