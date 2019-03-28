@@ -114,7 +114,7 @@ int main()
             {
                 if(heap[i].active==false)
                 {
-                    cout<<heap[i].key<<" "<<heap[i].data;
+                    cout<<heap[i].key<<"->"<<heap[i].data;
                 }
             }
 
@@ -123,9 +123,29 @@ int main()
             {
                 if(heap[i].active==true)
                 {
-                    cout<<heap[i].key<<" "<<heap[i].data<<endl;
+                    cout<<heap[i].key<<"->"<<heap[i].data<<endl;
                 }
             }
+            
+          // Indexing in Free List and Allocated List.
+         /* cout<<"Free List Index : \n";
+            for(int i=0;i<n;i++)
+            {
+                if(heap[i].active==false)
+                {
+                    cout<<i<<endl;
+                }
+            }
+
+            cout<<"\nAllocated List Index : \n";
+            for(int i=0;i<n;i++)
+            {
+                if(heap[i].active==true)
+                {
+                    cout<<i<<endl;
+                }
+            }
+            */
             break;
 
             case 4 :  exit(0); break;
