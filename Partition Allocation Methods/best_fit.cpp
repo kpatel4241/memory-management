@@ -85,7 +85,7 @@ int main()
 
     cout<<"\n Block Size : ";
     for(auto i=0;i<m;i++)
-        cout<<block_size[i]<<" ";
+        cout<<block_size[i]<<"\t";
     cout<<endl;
 
     best_fit(block_size , m , requested_size , n);
